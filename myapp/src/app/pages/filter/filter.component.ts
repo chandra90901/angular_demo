@@ -3,18 +3,19 @@ import { DemoService } from '../../services/demo.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-user',
-  standalone: true,
+  selector: 'app-filter',
   imports: [CommonModule],
-  templateUrl: './user.component.html',
-  styleUrl: './user.component.scss'
+  templateUrl: './filter.component.html',
+  styleUrls: ['./filter.component.scss']
 })
-export class UserComponent implements OnInit {
+export class FilterComponent implements OnInit {
   users: any[] = [];
   constructor(private demoService: DemoService) { }
   ngOnInit(): void {
-    this.demoService.getData().subscribe({
+    const kayword = 'john'
+    this.demoService.getFilterData(kayword).subscribe({
       next: (data) => {
+        console.log('Filtered users:', data);
         this.users = data;
       },
       error: (err) => {
@@ -23,4 +24,3 @@ export class UserComponent implements OnInit {
     });
   }
 }
-

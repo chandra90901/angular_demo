@@ -3,17 +3,16 @@ import { DemoService } from '../../services/demo.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-user',
-  standalone: true,
+  selector: 'app-tap',
   imports: [CommonModule],
-  templateUrl: './user.component.html',
-  styleUrl: './user.component.scss'
+  templateUrl: './tap.component.html',
+  styleUrl: './tap.component.scss'
 })
-export class UserComponent implements OnInit {
+export class TapComponent implements OnInit {
   users: any[] = [];
   constructor(private demoService: DemoService) { }
   ngOnInit(): void {
-    this.demoService.getData().subscribe({
+    this.demoService.getTap().subscribe({
       next: (data) => {
         this.users = data;
       },

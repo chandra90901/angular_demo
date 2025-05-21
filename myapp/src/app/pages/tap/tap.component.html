@@ -1,5 +1,6 @@
 <div class="container mt-3">
-    <h2>User List</h2>
+    <h2>Tap</h2>
+    <div *ngIf="users.length === 0">Loading users or no users available...</div>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -7,6 +8,7 @@
                 <th>Full Name</th>
                 <th>Email</th>
                 <th>Phone</th>
+                <th>Age</th>
                 <th>Username</th>
             </tr>
         </thead>
@@ -16,6 +18,7 @@
                 <td>{{ user.firstName }} {{ user.lastName }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.phone }}</td>
+                <td>{{user.age}}</td>
                 <td>{{ user.username }}</td>
             </tr>
         </tbody>

@@ -1,21 +1,20 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { DemoService } from '../../services/demo.service';
-import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-user',
-  standalone: true,
+  selector: 'app-merge-map',
   imports: [CommonModule],
-  templateUrl: './user.component.html',
-  styleUrl: './user.component.scss'
+  templateUrl: './merge-map.component.html',
+  styleUrl: './merge-map.component.scss'
 })
-export class UserComponent implements OnInit {
+export class MergeMapComponent implements OnInit {
   users: any[] = [];
   constructor(private demoService: DemoService) { }
   ngOnInit(): void {
-    this.demoService.getData().subscribe({
+    this.demoService.getmergeMapUsers().subscribe({
       next: (data) => {
-        this.users = data;
+        this.users.push(data);
       },
       error: (err) => {
         console.error('Error fetching users:', err);
@@ -23,4 +22,3 @@ export class UserComponent implements OnInit {
     });
   }
 }
-

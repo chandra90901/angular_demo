@@ -1,12 +1,18 @@
 <div class="container mt-3">
-    <h2>User List</h2>
-    <table class="table table-bordered">
+    <h2>SwitchMap Data</h2>
+
+    <input type="text" class="form-control mb-3" [formControl]="searchControl" placeholder="Search users..." />
+
+    <div *ngIf="loading" class="alert alert-info">Loading...</div>
+
+    <table class="table table-bordered" *ngIf="users.length > 0 || !loading">
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Full Name</th>
                 <th>Email</th>
                 <th>Phone</th>
+                <th>Age</th>
                 <th>Username</th>
             </tr>
         </thead>
@@ -16,7 +22,11 @@
                 <td>{{ user.firstName }} {{ user.lastName }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.phone }}</td>
+                <td>{{ user.age }}</td>
                 <td>{{ user.username }}</td>
+            </tr>
+            <tr *ngIf="users.length === 0 && !loading">
+                <td colspan="6" class="text-center">No users found.</td>
             </tr>
         </tbody>
     </table>
