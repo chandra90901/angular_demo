@@ -1,0 +1,41 @@
+<div class="container mt-3">
+    <h2>User List</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Username</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users; let i = index">
+                <ng-container *ngIf="editIndex !== i; else editMode">
+                    <td>{{ user.firstName }} {{ user.lastName }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.phone }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>
+                        <button class="me-2" (click)="onEdit(i)">Edit</button>
+                        <button (click)="onDelete(i)">Delete</button>
+                    </td>
+                </ng-container>
+                <ng-template #editMode>
+                    <td>
+                        <input class="form-control" [(ngModel)]="editableUser.firstName" placeholder="First Name">
+                        <input class="form-control mt-1" [(ngModel)]="editableUser.lastName" placeholder="Last Name">
+                    </td>
+                    <td><input class="form-control" [(ngModel)]="editableUser.email"></td>
+                    <td><input class="form-control" [(ngModel)]="editableUser.phone"></td>
+                    <td><input class="form-control" [(ngModel)]="editableUser.username"></td>
+                    <td>
+                        <button class=" me-2" (click)="onSave(i)">Save</button>
+                        <button (click)="onCancel()">Cancel</button>
+                    </td>
+                </ng-template>
+            </tr>
+        </tbody>
+    </table>
+</div>

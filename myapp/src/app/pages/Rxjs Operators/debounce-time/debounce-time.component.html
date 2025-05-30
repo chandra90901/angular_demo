@@ -1,22 +1,25 @@
 <div class="container mt-3">
-    <h2>User List</h2>
+    <h2>Debounce Time Data</h2>
+    <input [formControl]="searchControl" placeholder="Search users" />
     <table class="table table-bordered">
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Full Name</th>
                 <th>Email</th>
-                <!-- <th>Phone</th>
-                <th>Username</th> -->
+                <th>Phone</th>
+                <th>Age</th>
+                <th>Username</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let user of userInfos">
-                <!-- <td>{{ user.id }}</td> -->
+            <tr *ngFor="let user of users">
+                <td>{{ user.id }}</td>
                 <td>{{ user.firstName }} {{ user.lastName }}</td>
                 <td>{{ user.email }}</td>
-                <!-- <td>{{ user.phone }}</td> -->
-                <!-- <td>{{ user.username }}</td> -->
+                <td>{{ user.phone }}</td>
+                <td>{{user.age}}</td>
+                <td>{{ user.username }}</td>
             </tr>
         </tbody>
     </table>

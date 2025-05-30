@@ -7,3 +7,9 @@ export interface User {
     age?: number;
     username?: string;
 }
+
+export interface Userinfo {
+    firstName: string;
+    lastName: string;
+    email: string;
+}

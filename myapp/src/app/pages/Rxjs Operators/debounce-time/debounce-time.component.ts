@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { DemoService } from '../../services/demo.service';
 import { debounceTime, filter, switchMap } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { DemoService } from '../../../services/demo.service';
+import { User } from '../../../model/users';
 
 @Component({
   selector: 'app-debounce-time',
@@ -12,7 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 export class DebounceTimeComponent implements OnInit {
   searchControl = new FormControl('');
-  users: any[] = [];
+  users: User[] = [];
 
   constructor(private demoService: DemoService) { }
 

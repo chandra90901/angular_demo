@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DemoService } from '../../services/demo.service';
 import { CommonModule } from '@angular/common';
+import { Userinfo } from '../../model/users';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-user',
@@ -10,17 +12,18 @@ import { CommonModule } from '@angular/common';
   styleUrl: './user.component.scss'
 })
 export class UserComponent implements OnInit {
-  users: any[] = [];
-  constructor(private demoService: DemoService) { }
+  userInfos: Userinfo[] = [];
+  constructor(private userService: UserService) { }
   ngOnInit(): void {
-    this.demoService.getData().subscribe({
+    this.userService.getUsers().subscribe({
       next: (data) => {
-        this.users = data;
+        this.userInfos = data;
       },
       error: (err) => {
         console.error('Error fetching users:', err);
       }
     });
   }
+
 }
 

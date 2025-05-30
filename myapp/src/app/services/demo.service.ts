@@ -1,25 +1,23 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { firstValueFrom, map, mergeMap, Observable, of, switchMap, take, tap } from 'rxjs';
+import { firstValueFrom, from, map, mergeMap, Observable, of, switchMap, take, tap, toArray } from 'rxjs';
 import { User } from '../model/users';
+interface ApiResponse {
+  users: User[];
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class DemoService {
   private apiUrl = 'https://dummyjson.com/users';
 
-
   constructor(private http: HttpClient) { }
 
   getData(): Observable<User[]> {
     return this.http.get<{ users: User[] }>(this.apiUrl).pipe(
-      map(response =>
-        response.users.map((user: any) => ({
-          ...user,
-          firstName: user.firstName.toUpperCase(),
-        }))
-      )
+      map(response => response.users)
     );
   }
 
@@ -32,12 +30,13 @@ export class DemoService {
 
   getFilterData(keyword: string): Observable<User[]> {
     return this.http.get<{ users: User[] }>(this.apiUrl).pipe(
-      map(response => response.users || []),
-      map(users => users.filter(user => {
-        const fullName = `${user.firstName} ${user.lastName}`.toLowerCase();
-        return fullName.includes(keyword.toLowerCase());
-      }))
-    );
+      map(response => {
+        return (response.users || []).filter(user => {
+          const fullName = `${user.firstName} ${user.lastName}`.toLowerCase();
+          return fullName.includes(keyword.toLowerCase());
+        });
+      })
+    )
   }
 
   getTap(): Observable<User[]> {
@@ -48,9 +47,10 @@ export class DemoService {
   }
 
   getmergeMapUsers(): Observable<User[]> {
-    const ids = [1, 2, 3, 4];
-    return of(...ids).pipe(
-      mergeMap(id => this.http.get<User[]>(`${this.apiUrl}/${id}`))
+    const ids = [1, 2, 3, 4, 5];
+    return from(ids).pipe(
+      mergeMap(id => this.http.get<User>(`${this.apiUrl}/${id}`)),
+      toArray()
     );
   }
 
@@ -74,12 +74,8 @@ export class DemoService {
     );
   }
 
-  async getDataPromise(): Promise<User[]> {
-    try {
-      return await firstValueFrom(this.http.get<User[]>(this.apiUrl));
-    } catch (error) {
-      console.error('Promise Error:', error);
-      throw error;
-    }
+
+  async getDataPromise(): Promise<ApiResponse> {
+    return await firstValueFrom(this.http.get<ApiResponse>(this.apiUrl));
   }
 }

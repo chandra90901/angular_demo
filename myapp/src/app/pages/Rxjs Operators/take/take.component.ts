@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DemoService } from '../../services/demo.service';
+import { DemoService } from '../../../services/demo.service';
 import { CommonModule } from '@angular/common';
+import { User } from '../../../model/users';
 
 @Component({
   selector: 'app-take',
@@ -9,7 +10,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './take.component.scss'
 })
 export class TakeComponent implements OnInit {
-  users: any[] = [];
+  users: User[] = [];
   constructor(private demoService: DemoService) { }
   ngOnInit(): void {
     this.demoService.gettakeOnce().subscribe(data => {

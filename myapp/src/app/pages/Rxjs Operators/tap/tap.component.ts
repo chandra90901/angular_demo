@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DemoService } from '../../services/demo.service';
+import { DemoService } from '../../../services/demo.service';
 import { CommonModule } from '@angular/common';
+import { User } from '../../../model/users';
 
 @Component({
   selector: 'app-tap',
@@ -9,12 +10,13 @@ import { CommonModule } from '@angular/common';
   styleUrl: './tap.component.scss'
 })
 export class TapComponent implements OnInit {
-  users: any[] = [];
+  users: User[] = [];
   constructor(private demoService: DemoService) { }
   ngOnInit(): void {
     this.demoService.getTap().subscribe({
       next: (data) => {
         this.users = data;
+        console.log('Users received:', data);
       },
       error: (err) => {
         console.error('Error fetching users:', err);

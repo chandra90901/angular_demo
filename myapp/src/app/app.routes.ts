@@ -10,19 +10,23 @@ import { SenderComponent } from './pages/sender/sender.component';
 import { ReceiverComponent } from './pages/receiver/receiver.component';
 import { UserComponent } from './pages/user/user.component';
 import { DetailsComponent } from './pages/details/details.component';
-import { FilterComponent } from './pages/filter/filter.component';
-import { TapComponent } from './pages/tap/tap.component';
-import { MergeMapComponent } from './pages/merge-map/merge-map.component';
-import { SwitchMapComponent } from './pages/switch-map/switch-map.component';
-import { DebounceTimeComponent } from './pages/debounce-time/debounce-time.component';
-import { TakeComponent } from './pages/take/take.component';
+import { FilterComponent } from './pages/Rxjs Operators/filter/filter.component';
+import { SwitchMapComponent } from './pages/Rxjs Operators/switch-map/switch-map.component';
+import { TakeComponent } from './pages/Rxjs Operators/take/take.component';
+import { TapComponent } from './pages/Rxjs Operators/tap/tap.component';
+import { MergeMapComponent } from './pages/Rxjs Operators/merge-map/merge-map.component';
+import { DebounceTimeComponent } from './pages/Rxjs Operators/debounce-time/debounce-time.component';
+import { DatabindingComponentTwo } from './pages/lazyloading/databinding/databinding.component';
+import { EventbindingComponent } from './pages/lazyloading/eventbinding/eventbinding.component';
+import { UserinfoComponent } from './pages/userinfo/userinfo.component';
 
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'data', pathMatch: 'full' },
-    { path: 'data', component: DatabindingComponent },
+    { path: '', redirectTo: 'databinding', pathMatch: 'full' },
+    { path: 'databinding', component: DatabindingComponent },
     { path: 'hooks', component: HooksComponent },
     { path: 'custom', component: CustomdirectivesComponent },
+    { path: 'userinfo', component: UserinfoComponent },
     { path: 'parent', component: ParentComponent },
     { path: 'child', component: ChildComponent },
     { path: 'parent2', component: Parent2Component },
@@ -36,5 +40,10 @@ export const routes: Routes = [
     { path: 'mergeMap', component: MergeMapComponent },
     { path: 'switchMap', component: SwitchMapComponent },
     { path: 'debounceTime', component: DebounceTimeComponent },
-    { path: 'take', component: TakeComponent }
+    { path: 'take', component: TakeComponent },
+    {
+        path: 'lazy',
+        loadChildren: () => import('./pages/lazyloading/lazy/lazy.module').then(m => m.LazyModule)
+    }
 ];
+
